@@ -1,0 +1,27 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: rgb(90, 101, 110);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 800px;
+  width: 800px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.squares {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+}
