@@ -1,7 +1,11 @@
 let container = document.querySelector(".container");
 
-function createGrid(gridDimensions) {
-  let gridPixelSize = 800 / gridDimensions;
+//when the createGrid number is on certain numbers, the borders around the squares have a gap. FIX IT!
+createGrid(16);
+
+function createGrid(gridDimensions) {  
+  let gridSize = 800;
+  let gridPixelSize = gridSize / gridDimensions;
 
   for(row = 1; row < (gridDimensions + 1); row++) {
     let column = 1;
@@ -20,13 +24,30 @@ function createGrid(gridDimensions) {
       container.appendChild(square);
     }
   }
+  drawOnGrid();
 }
-createGrid(22);
 
-let squares = document.querySelectorAll(".squares");
+function drawOnGrid() {
+  let squares = document.querySelectorAll(".squares");
 
-squares.forEach((square) => {
-  square.addEventListener("mouseover", () => {
-    square.style.backgroundColor = "black";
+  squares.forEach((square) => {
+    square.addEventListener("mouseover", () => {
+      square.style.backgroundColor = "black";
+    });
   });
-});
+}
+
+function changeGridSize() {
+  let validAnswer = false;
+  while(!validAnswer) {
+    let userInput = prompt("How big should the grid be? Enter a number between 8 to 100.");
+    userInput = Number(userInput);
+    userInput = Math.round(userInput);
+
+    if(userInput => 8 && userInput <= 100) {
+      validAnswer = true;
+      container.innerHTML = "";
+      createGrid(userInput);
+    }
+  }
+}
