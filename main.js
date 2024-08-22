@@ -1,11 +1,11 @@
 let container = document.querySelector(".container");
 
-//when the createGrid number is on certain numbers, the borders around the squares have a gap. FIX IT!
 createGrid(16);
 
 function createGrid(gridDimensions) {  
   let gridSize = 800;
   let gridPixelSize = gridSize / gridDimensions;
+  console.log(gridPixelSize);
 
   for(row = 1; row < (gridDimensions + 1); row++) {
     let column = 1;
@@ -28,12 +28,8 @@ function createGrid(gridDimensions) {
 }
 
 function drawOnGrid() {
-  let squares = document.querySelectorAll(".squares");
-
-  squares.forEach((square) => {
-    square.addEventListener("mouseover", () => {
-      square.style.backgroundColor = "black";
-    });
+  container.addEventListener("mousemove", (e) => {
+    e.target.style.backgroundColor = "black";
   });
 }
 
@@ -44,7 +40,7 @@ function changeGridSize() {
     userInput = Number(userInput);
     userInput = Math.round(userInput);
 
-    if(userInput => 8 && userInput <= 100) {
+    if(userInput >= 8 && userInput <= 100) {
       validAnswer = true;
       container.innerHTML = "";
       createGrid(userInput);
