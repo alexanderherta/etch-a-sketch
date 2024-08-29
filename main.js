@@ -5,7 +5,6 @@ createGrid(16);
 function createGrid(gridDimensions) {  
   let gridSize = 800;
   let gridPixelSize = gridSize / gridDimensions;
-  console.log(gridPixelSize);
 
   for(row = 1; row < (gridDimensions + 1); row++) {
     let column = 1;
@@ -24,13 +23,35 @@ function createGrid(gridDimensions) {
       container.appendChild(square);
     }
   }
-  drawOnGrid();
+  drawOnGrid(gridPixelSize);
 }
 
-function drawOnGrid() {
-  container.addEventListener("mousemove", (e) => {
-    e.target.style.backgroundColor = "black";
+function drawOnGrid(gridPixelSize) {
+  
+  let squares = document.querySelectorAll(".squares");
+  console.log(squares);
+
+  squares.forEach((square) => {
+    let squareDark = document.createElement("div");
+    squareDark.style.height = `${gridPixelSize}px`;
+    squareDark.style.width = `${gridPixelSize}px`;
+    squareDark.style.backgroundColor = "black";
+    let squareDarkOpacity = 0;
+    squareDark.style.opacity = `${squareDarkOpacity}`;
+    square.appendChild(squareDark);
+
+    square.addEventListener("mouseover", (e) => {
+      if(!hasColorBeenSet.includes(square)) {
+        hasColorBeenSet.push(square);
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        square.style.backgroundColor = `#${randomColor}`;
+      }
+
+      squareDarkOpacity += 0.1;
+      squareDark.style.opacity = `${squareDarkOpacity}`;
+    });
   });
+  let hasColorBeenSet = [];
 }
 
 function changeGridSize() {
