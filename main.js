@@ -4,17 +4,11 @@ createGrid(16);
 
 function createGrid(gridDimensions) {  
   let gridSize = 800;
-  let gridPixelSize = gridSize / gridDimensions;
+  let gridPixelSize = Math.round(gridSize / gridDimensions);
+  let containerSize = gridDimensions * gridPixelSize;
 
-  for(row = 1; row < (gridDimensions + 1); row++) {
-    let column = 1;
-    let square = document.createElement("div");
-    square.id = "square-" + row + "-" + column;
-    square.className = "squares";
-    square.style.height = `${gridPixelSize}px`;
-    square.style.width = `${gridPixelSize}px`;
-    container.appendChild(square);
-    for(column = 2; column < (gridDimensions + 1); column++) {
+  for(let row = 1; row < (gridDimensions + 1); row++) {
+    for(let column = 1; column < (gridDimensions + 1); column++) {
       let square = document.createElement("div");
       square.id = "square-" + row + "-" + column;
       square.className = "squares";
@@ -23,13 +17,15 @@ function createGrid(gridDimensions) {
       container.appendChild(square);
     }
   }
+  container.style.height = `${containerSize}px`;
+  container.style.width = `${containerSize}px`;
+
   drawOnGrid(gridPixelSize);
 }
 
 function drawOnGrid(gridPixelSize) {
   
   let squares = document.querySelectorAll(".squares");
-  console.log(squares);
 
   squares.forEach((square) => {
     let squareDark = document.createElement("div");
